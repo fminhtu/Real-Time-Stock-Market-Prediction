@@ -8,14 +8,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import matplotlib.dates as mdates
-from mpl_finance import candlestick_ohlc
+# from mplfinance import candlestick_ohlc
+from mplfinance.original_flavor import candlestick_ohlc
 import matplotlib
 import pickle 
 import pylab
 from alpha_vantage.timeseries import TimeSeries
 import pandas as pd
 from matplotlib import style
-from eval import main
+# from eval import main
 from matplotlib import animation
 from sentiment import news2sentiment
 from forecasting.forecast import *
@@ -28,7 +29,7 @@ matplotlib.rcParams.update({'font.size': 9})
 # Go to https://www.alphavantage.co/support/#api-key
 # Generate the key
 #Put your key in key parameter
-ts = TimeSeries(key='',output_format='pandas')
+ts = TimeSeries(key='9SVN10ZYOXLJNH0Y',output_format='pandas')
 count = -1
 test_size = 10
 
@@ -161,7 +162,7 @@ def graphData(stock,MA1,MA2,interval):
 		# results_backup_lstm = results_LSTM
 		# results_backup_gru = results_GRU
 		manual_run = False
-		main(temp, 10, "model_noisynstepperdddqn_20", True, manual_run)
+		# eval.main(temp, 10, "model_noisynstepperdddqn_20", True, manual_run)
 		#print('Results Leng:-', len(results[0]))
 		prev_date = date
 		ax1.axvline(x=date[-1], color = 'r',linewidth=2)
