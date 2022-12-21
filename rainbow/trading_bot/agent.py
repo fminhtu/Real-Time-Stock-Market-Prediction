@@ -18,7 +18,7 @@ from keras.layers import Dense, Lambda, Input, Add
 from keras.optimizers import Adam
 from .NoisyDense import NoisyDense
 # from keras.engine.topology import Layer
-from keras.utils.layer_utils import Layer
+from tensorflow.keras.layers import Layer
 from keras.utils import CustomObjectScope
 
 

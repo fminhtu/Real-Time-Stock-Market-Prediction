@@ -16,7 +16,7 @@ import pylab
 from alpha_vantage.timeseries import TimeSeries
 import pandas as pd
 from matplotlib import style
-# from eval import main
+from eval import main
 from matplotlib import animation
 from sentiment import news2sentiment
 from forecasting.forecast import *
@@ -110,6 +110,7 @@ def graphData(stock,MA1,MA2,interval):
 		
 	print('Currently Pulling',stock)
 	data, meta_data = ts.get_intraday(symbol=stock,interval=str(interval)+'min')
+	data.to_csv('rainbow/data/test.csv')
 	# data.to_csv('data/NSEI1min.csv')
 	# data = data.iloc[::-1]
 	data['date'] = data.index
@@ -135,7 +136,6 @@ def graphData(stock,MA1,MA2,interval):
 		newAr.append(appendLine) #contains data for candlestick ohlc plot
 		x+=1
 
-
 	global count
 	global results_backup
 	global results_backup_lstm
@@ -155,21 +155,32 @@ def graphData(stock,MA1,MA2,interval):
 		temp = []
 		results_LSTM.append(forecast_LSTM(df_train, minmax_for, data))
 		results_GRU.append(forecast_GRU(df_train, minmax_for, data))
+
+		# print("Result_LSTM", results_LSTM)
+		# print("Result_LSTM size", len(results_LSTM[0]))
+		# print("Result_GRU", results_GRU)
+		# print("Result_LSTM size", len(results_GRU[0]))
+
 		for i in range(len(results_LSTM[0])):
 			temp.append((results_LSTM[0][i] + results_GRU[0][i])/2)
 		results.append(temp)
 		results_backup = results 
+
+		# print("Results", results_GRU)
+		# print("Results size", len(results[0]))
+
 		# results_backup_lstm = results_LSTM
 		# results_backup_gru = results_GRU
 		manual_run = False
-		# eval.main(temp, 10, "model_noisynstepperdddqn_20", True, manual_run)
+		main(temp, 10, "model_dqn_GOOG_50", True, manual_run)
 		#print('Results Leng:-', len(results[0]))
 		prev_date = date
 		ax1.axvline(x=date[-1], color = 'r',linewidth=2)
 		date2add = [date[-1]]
-		# print(date)
+		print("date", date)
 		for i in range(test_size):
 			date2add.append(date2add[-1] + (0.0006944444*interval))
+		print("date2add", date2add)
 		# for no, r in enumerate(results_LSTM):
 		# 	ax1.plot(date + date2add[1:],r, label = 'LSTM', linewidth = 2, alpha = 0.5)
 		# for no, r in enumerate(results_GRU):

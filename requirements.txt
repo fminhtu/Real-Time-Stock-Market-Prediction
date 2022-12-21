@@ -1,5 +1,5 @@
 keras
-tensorflow==2.9.3
+tensorflow
 pandas
 numpy
 tqdm
@@ -12,7 +12,7 @@ altair
 beautifulsoup4
 mplfinance
 matplotlib
-pickle5
+# pickle5
 scikit-learn
 requests
 simplejson
