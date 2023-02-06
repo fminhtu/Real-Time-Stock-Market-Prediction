@@ -120,8 +120,9 @@ def graphData(stock,MA1,MA2,interval):
 	#print(data)
 	global df_train
 	scores = news2sentiment()
+
 	df_train, minmax_for = preprocess_data(data, scores)
-	#print('Data Frame:-',df_train)
+	print('Data Frame:-',df_train)
 	
 	# except Exception as e:
 	# 	print(str(e), 'failed to pull pricing data')
